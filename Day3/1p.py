@@ -6,27 +6,26 @@ print(input)
 results = []
 
 for line in input:
-    first = 0
-    second = 0
-    first_index = 0
-    line = str(line)
+   line = str(line)
+   voltages = [0, 0,0,0,0,0,0,0,0,0,0,0]
+   indexes = [0,0,0,0,0,0,0,0,0,0,0,0]
+   
+   for iteration in range(0,12):
+       print(len(line)-12+iteration)
+       print(indexes[iteration])
+       for volt_index in range(indexes[iteration], len(line)-11+iteration):
+           print(f"comparing {int(line[volt_index])} > {voltages[iteration]}")
+           if int(line[volt_index]) > voltages[iteration]:
+               print(f'assigning to {line[volt_index]}')
+               voltages[iteration] = int(line[volt_index])
+               if iteration != len(voltages) - 1:
+                  print(f'next index: {volt_index}')
+                  indexes[iteration+1] = volt_index +1
+   temp = ''
+   for volt in voltages:
+       temp += str(volt)
 
-    for volt_index in range(0, len(line)-1):
-        print(f"comparing {int(line[volt_index])} > {first}")
-        if int(line[volt_index]) > first:
-            print(f"{int(line[volt_index])} > {first}")
-            print("assigning first to " + line[volt_index])
-
-            first = int(line[volt_index])
-            first_index = volt_index
-    print('identify second')
-    for volt_index in range(first_index+1, len(line)):
-        print(f"comparing {int(line[volt_index])} > {second}")
-
-        if int(line[volt_index]) > second:
-            print('assigning second to ' + line[volt_index])
-            second = int(line[volt_index])
-    print(f'appending {first} and {second}')
-    results.append(int(f'{first}{second}'))
+   print(f'appending {temp} ')
+   results.append(int(temp))
 print(results)
 print(sum(results))
